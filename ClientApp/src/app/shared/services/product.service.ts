@@ -16,6 +16,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Product[]> {
+
     let z = document.getElementsByTagName('base')[0].href;
     return this.http.get<Product[]>('/data/products.json');
   }
