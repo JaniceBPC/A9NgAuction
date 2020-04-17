@@ -31,48 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\data\img\backpack.png" />
-    <Content Remove="wwwroot\data\img\beachball.png" />
-    <Content Remove="wwwroot\data\img\binoculars.png" />
-    <Content Remove="wwwroot\data\img\brush.png" />
-    <Content Remove="wwwroot\data\img\chucks.png" />
-    <Content Remove="wwwroot\data\img\clock.png" />
-    <Content Remove="wwwroot\data\img\fish_bowl.png" />
-    <Content Remove="wwwroot\data\img\flippers.png" />
-    <Content Remove="wwwroot\data\img\green-shoes.png" />
-    <Content Remove="wwwroot\data\img\helmet.png" />
-    <Content Remove="wwwroot\data\img\lipstick.png" />
-    <Content Remove="wwwroot\data\img\popsicle.png" />
-    <Content Remove="wwwroot\data\img\radio.png" />
-    <Content Remove="wwwroot\data\img\sunnies.png" />
-    <Content Remove="wwwroot\data\img\surfboard.png" />
-    <Content Remove="wwwroot\data\img\teapot.png" />
-    <Content Remove="wwwroot\data\products.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="ClientApp\src\app\app.routing.module.ts" />
     <None Remove="ClientApp\src\app\styles\app.routing.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\data\img\backpack.png" />
-    <None Include="wwwroot\data\img\beachball.png" />
-    <None Include="wwwroot\data\img\binoculars.png" />
-    <None Include="wwwroot\data\img\brush.png" />
-    <None Include="wwwroot\data\img\chucks.png" />
-    <None Include="wwwroot\data\img\clock.png" />
-    <None Include="wwwroot\data\img\fish_bowl.png" />
-    <None Include="wwwroot\data\img\flippers.png" />
-    <None Include="wwwroot\data\img\green-shoes.png" />
-    <None Include="wwwroot\data\img\helmet.png" />
-    <None Include="wwwroot\data\img\lipstick.png" />
-    <None Include="wwwroot\data\img\popsicle.png" />
-    <None Include="wwwroot\data\img\radio.png" />
-    <None Include="wwwroot\data\img\sunnies.png" />
-    <None Include="wwwroot\data\img\surfboard.png" />
-    <None Include="wwwroot\data\img\teapot.png" />
-    <None Include="wwwroot\data\products.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -1,4 +1,4 @@
-import { filter, map, switchMap} from 'rxjs/operators';
+import { filter, map, switchMap, subscribeOn} from 'rxjs/operators';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -22,7 +22,11 @@ export class ProductComponent {
         map(params => parseInt(params.get('productId') || '', 10)),
         filter(productId => !!productId),
         switchMap(productId => this.productService.getById(productId as number))
-      );
+    );
+    console.log(`All products`);
+    this.productService.getAll().subscribe(console.log);
+    console.log("Lookup product id: 1");
+    console.log(this.productService.getById(1));
 
     this.suggestedProducts$ = this.productService.getAll();
   }

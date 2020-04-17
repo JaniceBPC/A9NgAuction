@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <directoryBrowse enabled="true" />
   <meta charset="utf-8" />
   <title>Angular Development with Type Script</title>
   <base href="/" />
@@ -10,5 +11,11 @@
 </head>
 <body>
 <app-root>Loading...</app-root>
+<div>
+  <h2>Products</h2>
+  <input type="file" id="ctrl" webkitdirectory directory multiple />
+  <link rel="/data/products.json" type="application/json" />
+</div>
+
 </body>
 </html>
