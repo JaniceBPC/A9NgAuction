@@ -1,5 +1,5 @@
 <div class="grid-list-container">
-  <mat-grid-list [cols]="columns$ | async" gutterSize="16">
+  <mat-grid-list cols="2" gutterSize="16">
     <mat-grid-tile class="tile" *ngFor="let product of products$ | async">
       <a class="tile__content"
          fxLayout="column"
@@ -10,7 +10,7 @@
               ngClass.xs="tile__price-tag--xs">
           {{ product.price | currency:'USD':'symbol':'.0' }}
         </span>
-
+        dd
         <div class="tile__thumbnail"
              [ngStyle]="{'background-image': 'url(' + product.imageUrl + ')'}"></div>
 

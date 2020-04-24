@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 export interface Product {
@@ -12,32 +13,42 @@ export interface Product {
 }
 
 @Injectable()
-export class ProductService {
-  constructor(private http: HttpClient) {}
+export class ProductService  {
+  constructor(private http: HttpClient) {
 
-  getAll(): Observable<Product[]> {
+    console.log("Product Service Created");
 
-    console.log(document.getElementsByTagName('base')[0].href);
+    this.setup();
+  }
+
+  public productsObservable$: Observable<Product[]>;
+  public products: Product[];
+
+  private setup() {
+    console.log("Setup Product Service");
 
     console.log("Base Url:");
-    const products = this.http.get<Product[]>('/data/products.json');
+    console.log(`.. ${document.getElementsByTagName('base')[0].href}`);
 
-    console.log("List of products");
+    this.productsObservable$ = this.http.get<Product[]>('/data/products.json');
 
-    products.subscribe({
-      next(response) { console.log(response.values().toLocaleString()); },
-      error(err) { console.error('Error: ' + err); },
-      complete() { console.log('Completed'); }
-    });
+    //console.log("List of products");
 
-    console.log("Exiting products service getAll");
-    return products;
+    //this.productsObservable$.subscribe((x: Product[]) => {
+    //  this.products = x;
+    //}
+    //);
+  }
+  getAll(): Observable<Product[]> {
+    return this.productsObservable$;
   }
 
   getById(productId: number): Observable<Product> {
-    return this.http.get<Product[]>('/data/products.json')
+    const productObservable = this.http.get<Product[]>('/data/products.json')
       .pipe(
-        map(products => products.find(p => p.id === productId) as Product)
-      );
+        map((products: Product[]) => products.find(p => p.id === productId) as Product)
+    );
+
+    return productObservable;
   }
 }

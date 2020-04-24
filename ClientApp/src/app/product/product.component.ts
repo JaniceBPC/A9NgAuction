@@ -1,33 +1,43 @@
-import { filter, map, switchMap, subscribeOn} from 'rxjs/operators';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+//import { Subject } from 'rxjs/Subject';
 import { Product, ProductService } from '../shared/services';
+import { ActivatedRoute } from "@angular/router";
+import { filter, map, switchMap } from 'rxjs/operators';
+import { Product as IProduct } from "../shared/services/product.service";
+
 
 @Component({
   selector: 'nga-product',
   styleUrls: [ './product.component.scss' ],
   templateUrl: './product.component.html'
 })
-export class ProductComponent {
+export class ProductComponent  {
   product$: Observable<Product>;
   suggestedProducts$: Observable<Product[]>;
 
   constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.product$ = this.route.paramMap
+    this.setup();
+  }
+
+  private  async setup() {
+    const source = this.activatedRoute.paramMap
       .pipe(
         map(params => parseInt(params.get('productId') || '', 10)),
         filter(productId => !!productId),
-        switchMap(productId => this.productService.getById(productId as number))
-    );
-    console.log(`All products`);
-    this.productService.getAll().subscribe(console.log);
-    console.log("Lookup product id: 1");
-    console.log(this.productService.getById(1));
+        switchMap(productId => this.productService.getById(productId)));
 
-    this.suggestedProducts$ = this.productService.getAll();
+    const subject = new Subject<IProduct>();
+
+    source.subscribe(subject);
+
+    subject.subscribe(x => console.log(`Selection: ${x}, ${x.title}`));
+
+    this.product$ = source;
+
+    this.suggestedProducts$ = this.productService.productsObservable$;
   }
 }
